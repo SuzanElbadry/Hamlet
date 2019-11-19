@@ -1,4 +1,4 @@
-# Eliiza_Hamlet
+# Hamlet
 
 # Task 1: Show the number of lines said per character throughout the play.
 ## Preprocessing
