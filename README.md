@@ -15,7 +15,7 @@
 - Count Single-line conversation: conversation for each speaker: Multi-lines are extracted using regex "\\t".
 - Count the number of speakers in each sentence: Speakers count are identified by regex "[A-Z]+\t"
 
-# Task 2: Make a word cloud of unusual words in the script
+# Task 2: Make a word cloud of unusual words in the script.
 ## Assumptions:
  Unusual words in hamlet are considered to be words with the lowest frequencies.
 ## Preprocessing
