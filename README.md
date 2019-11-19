@@ -10,10 +10,10 @@
  6. Final preprocessed output included whole paragrapg conversation for each charcter and the corresponding scene.
  7. Punctuation is removed from text after multi speakers are extracted.
 
-Identifyinhg speakers: MultiSpeakers are identified according to the delimiter "|" and are extracted using regex "([A-Z][A-Z]+)|.", otherwise single speakers are identified by "\n\n".
-Count Multi-line conversation for each speaker: Multi-lines are extracted using regex "[a-z|A-Z]+\\n\\t".
-Count Single-line conversation: conversation for each speaker: Multi-lines are extracted using regex "\\t".
-Count the number of speakers in each sentence: Speakers count are identified by regex "[A-Z]+\t"
+- Identifyinhg speakers: MultiSpeakers are identified according to the delimiter "|" and are extracted using regex "([A-Z][A-Z]+)|.", otherwise single speakers are identified by "\n\n".
+- Count Multi-line conversation for each speaker: Multi-lines are extracted using regex "[a-z|A-Z]+\\n\\t".
+- Count Single-line conversation: conversation for each speaker: Multi-lines are extracted using regex "\\t".
+- Count the number of speakers in each sentence: Speakers count are identified by regex "[A-Z]+\t"
 
 # Task 2: Make a word cloud of unusual words in the script
 ## Assumptions:
@@ -32,5 +32,5 @@ Count the number of speakers in each sentence: Speakers count are identified by 
 2. Punctuation removed.
 3. Delimiter "\n\t" is replaced by "." Delimiters "\n+" and "\t+" are replaced by space.
 
-The sentiment score of each line is caculated and averaged for each scene.
-Sentiment analysis models trained on the old english language will provide better sentiment scores. 
+- The sentiment score of each line is caculated and averaged for each scene.
+- Sentiment analysis models trained on the old english language will provide better sentiment scores. 
