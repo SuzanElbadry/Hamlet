@@ -2,7 +2,7 @@
 
 # Task 1: Show the number of lines said per character throughout the play.
 ## Preprocessing
- 1. Actions taking the format "\n\t[]" are replaced by an empty string.
+ 1. Actions taking the format "\n\\t\\[(.*?)\\]" are replaced by an empty string.
  2. The title "HAMLET" coming before the start of every ACT having the format "\n\nHAMLET\n\n" is replaced by an empty string.
  3. Extra newlines are replaced by a single newline.
  4. Character introduction part is excluded and preprocessing is applied from SCENE 1.
