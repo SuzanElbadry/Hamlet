@@ -4,7 +4,6 @@ library(sentimentr)
 library(data.table)
 library(ggplot2)
 library(SnowballC)
-library(testthat)
 
 ReadFile <- function(Path){
   if (file.exists(Path))
@@ -17,19 +16,12 @@ ParagrapgScenceMap <- function(x) {is_na<-is.na(x); x[Reduce(function(i,j) if (i
 
 PreprocessText <- function(HamletText){
   if(HamletText!=""){
-    #Remove Action Text
     HamletText <-  gsub("\\n\\t\\[(.*?)\\]","",HamletText)
-    #Remove Hamlet Before ACT
     HamletText <- gsub("\n\n\tHAMLET\n\n","",HamletText)
-    #Remove Extra newline and tabs
     HamletText <- gsub("\n\n[\n]+\t","\n\t",HamletText)
-    #Ger Scene Index
     SCENEIDX <-  gregexpr("SCENE", HamletText)
-    #Exclude Introduction
     HamletText <- substr(HamletText,SCENEIDX[[1]][1],nchar(HamletText))
-    #Start Index of whole speaker paragraph
     NewLineIDX <-  gregexpr("\n\n[A-Z]+", HamletText)
-    
     DTFinal <- data.table(matrix(nrow = lengths(NewLineIDX),ncol=2))
     DTFinal$V1 <- as.character(DTFinal$V1)
     DTFinal$V2 <- as.character(DTFinal$V2)
@@ -132,31 +124,7 @@ AggregateCounts <- function(SentStatsList){
   return(TotalCount)
 }
 
-#HamletTest.R
-source('Eliiza_HamletV4.R')
-Hamlet <- ReadFile("hamlet.txt")
-test_that('First 2 Scenes Speakers', {
-  Sub <- substr(Hamlet,0,21039)
-  SubHamletTest <- data.table(text=Sub)
-  SpeakersPart <- setorder(Task1(SubHamletTest),-Total)
-  
-  
-  RightSpeakersCount <- data.table(Speakers=c("HORATIO","HAMLET","KING CLAUDIUS","MARCELLUS","BERNARDO","FRANCISCO","QUEEN GERTRUDE","LAERTES","LORD POLONIUS","CORNELIUS","VOLTIMAND"),
-                                   Total=c(149,95,93,52,38,10,10,7,4,1,1))
-  
-  expect_that(SpeakersPart[,1], equals(RightSpeakersCount[,1]))
-})
-
-test_that('First 2 Scenes Speakers Count', {
-  Sub <- substr(Hamlet,0,21039)
-  SubHamletTest <- data.table(text=Sub)
-  SpeakersPart <- setorder(Task1(SubHamletTest),-Total)
-  RightSpeakersCount <- data.table(Speakers=c("HORATIO","HAMLET","KING CLAUDIUS","MARCELLUS","BERNARDO","FRANCISCO","QUEEN GERTRUDE","LAERTES","LORD POLONIUS","CORNELIUS","VOLTIMAND"),
-                                   Total=c(149,95,93,52,38,10,10,7,4,1,1))
-  expect_that(SpeakersPart[,2], equals(RightSpeakersCount[,2]))
-})
-
-PreprocessTextWordCloud <- function(Hamlet,freq){
+PreprocessTextWordCloud <- function(Hamlet,frequency){
   HamletDT <- as.data.table(PreprocessText(Hamlet$text))
   HamletDT$Text <- removePunctuation(HamletDT$Text)
   docs <- Corpus(VectorSource(HamletDT$Text))
@@ -170,7 +138,7 @@ PreprocessTextWordCloud <- function(Hamlet,freq){
   m <- as.matrix(dtm)
   v <-sort(rowSums(m),decreasing=FALSE)
   WordFreq <- data.frame(word = names(v),freq=v)
-  WordFreq <-  subset(WordFreq,freq==1)
+  WordFreq <-  subset(WordFreq,freq<=frequency)
   return(WordFreq)
 }
 
@@ -227,7 +195,7 @@ Task3 <- function(Hamlet){
 Hamlet <- ReadFile("hamlet.txt")
 SpeakersLinesCount <- Task1(Hamlet)
 p<-ggplot(data=SpeakersLinesCount, aes(x=reorder(Speakers, -Total), y=Total)) +geom_text(aes(label = Total), position=position_dodge(width=0.9), vjust=-1)+
-  geom_bar(stat="identity")+ theme(axis.text.x = element_text(angle = 90, hjust = 1))
+  geom_bar(stat="identity")+ theme(axis.text.x = element_text(angle = 90, hjust = 1))+labs(x="Speakers")
 p
 
 Task2(Hamlet,1)
