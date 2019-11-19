@@ -34,7 +34,7 @@
 
 - The sentiment score of each line is caculated and averaged for each scene.
 
-#Future work
+# Future work
 - Sentiment analysis models trained on the old english language will provide better sentiment scores. 
 - Additional units tests can be added.
 - A Hamlet package can be created .
