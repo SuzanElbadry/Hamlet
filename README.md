@@ -33,4 +33,8 @@
 3. Delimiter "\n\t" is replaced by "." Delimiters "\n+" and "\t+" are replaced by space.
 
 - The sentiment score of each line is caculated and averaged for each scene.
+
+#Future work
 - Sentiment analysis models trained on the old english language will provide better sentiment scores. 
+- Additional units tests can be added.
+- A Hamlet package can be created .
