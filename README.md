@@ -1,6 +1,6 @@
 # Hamlet
 
-# Task 1: Show the number of lines said per character throughout the play.
+# Show the number of lines said per character throughout the play.
 ## Preprocessing
  1. Actions taking the format "\n\\t\\[(.*?)\\]" are replaced by an empty string.
  2. The title "HAMLET" coming before the start of every ACT having the format "\n\nHAMLET\n\n" is replaced by an empty string.
@@ -15,7 +15,7 @@
 - Count Single-line conversation: conversation for each speaker: Multi-lines are extracted using regex "\\t".
 - Count the number of speakers in each sentence: Speakers count are identified by regex "[A-Z]+\t"
 
-# Task 2: Make a word cloud of unusual words in the script.
+# Make a word cloud of unusual words in the script.
 ## Assumptions:
  Unusual words in hamlet are considered to be words with the lowest frequencies.
 ## Preprocessing
@@ -26,15 +26,10 @@
  5. Stop words are removed. 
  6. Word steming is applied. 
 
-# Task 3: Compute the sentiment score for each scene.
+# Compute the sentiment score for each scene.
 ## Preprocessing
 1. Preprocessing steps 1-4 are applied to the text.
 2. Punctuation removed.
 3. Delimiter "\n\t" is replaced by "." Delimiters "\n+" and "\t+" are replaced by space.
 
 - The sentiment score of each line is caculated and averaged for each scene.
-
-# Future work
-- Sentiment analysis models trained on the old english language will provide better sentiment scores. 
-- Additional units tests can be added.
-- A Hamlet package can be created .
